@@ -149,28 +149,28 @@ const Video = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const videoRes = await axios.get(`/videos/find/${path}`);
+        const videoRes = await axios.get(`https://abmbackend11.onrender.com/api/videos/find/${path}`);
 
-        const commentRes = await axios.get(`/comments/${path}`)
+        const commentRes = await axios.get(`https://abmbackend11.onrender.com/api/comments/${path}`)
         setVideoComments(commentRes.data);
         setcurrentCommentsLength(commentRes.data.length);
 
         const channelRes = await axios.get(
-          `/users/find/${videoRes.data.userId}`
+          `https://abmbackend11.onrender.com/api/users/find/${videoRes.data.userId}`
         );
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
-      } catch (err) {}
+      } catch (err) {} 
     };
     fetchData();
   }, [path, dispatch]);
 
   const handleLike = async () => {
-    await axios.put(`/users/like/${currentVideo._id}`);
+    await axios.put(`https://abmbackend11.onrender.com/api/users/like/${currentVideo._id}`);
     dispatch(like(currentUser._id));
   };
   const handleDislike = async () => {
-    await axios.put(`/users/dislike/${currentVideo._id}`);
+    await axios.put(`https://abmbackend11.onrender.com/api/users/dislike/${currentVideo._id}`);
     dispatch(dislike(currentUser._id));
   };
 
@@ -192,7 +192,7 @@ const Video = () => {
 
 
   const handleComment = async () => {
-    await axios.post(`/comments`, {
+    await axios.post(`https://abmbackend11.onrender.com/api/comments`, {
       desc: commentDesc,
       videoId: currentVideo._id
     });
@@ -249,7 +249,7 @@ console.log(channel);
 
 
           <Subscribe onClick={handleSub}>
-          {currentUser?.subscribedUsers?.includes(channel?._id)
+          {currentUser.subscribedUsers?.includes(channel?._id)
             ? "SUBSCRIBED"
             : "SUBSCRIBE"}
         </Subscribe>
