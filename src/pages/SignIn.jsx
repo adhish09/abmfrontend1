@@ -81,7 +81,7 @@ const SignIn = () => {
     dispatch(loginStart());
 
     try {
-      const res = await axios.post("/auth/signin", { name, password });
+      const res = await axios.post("https://abmbackend11.onrender.com/api/auth/signin", { name, password });
       dispatch(loginSuccess(res.data));
       console.log ("login", res.data);
       navigate("/")
@@ -95,7 +95,7 @@ const SignIn = () => {
 
     const img = "https://uploads.commoninja.com/searchengine/wordpress/adorable-avatars.png"
     try {
-      const res = await axios.post("/auth/signup", { name,email,img, password });
+      const res = await axios.post("https://abmbackend11.onrender.com/api/auth/signup", { name,email,img, password });
       dispatch(loginSuccess(res.data));
       console.log("signup", res.data);
       navigate("/")
@@ -109,7 +109,7 @@ const SignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
-          .post("/auth/google", {
+          .post("https://abmbackend11.onrender.com/api/auth/google", {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,
