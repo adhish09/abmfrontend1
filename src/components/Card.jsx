@@ -10,14 +10,14 @@ const Card = ({video, type}) => {
 
   useEffect(()=> {
       const fetchChannel = async () => {
-         const res = await axios.get(`/users/find/${video.userId}`)
+         const res = await axios.get(`https://abmbackend11.onrender.com/api/users/find/${video.userId}`)
          setChannel(res.data);
       }
       fetchChannel();
   }, [video.userId]);
 
   const addViewVideo = async () => {
-       await axios.put(`/videos/view/${video._id}`);
+       await axios.put(`https://abmbackend11.onrender.com/api/videos/view/${video._id}`);
   };
 
   const navigateToVideo = async () => {

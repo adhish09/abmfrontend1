@@ -160,18 +160,18 @@ const Video = () => {
         );
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
-      } catch (err) {} 
+      } catch (err) {}
     };
     fetchData();
   }, [path, dispatch]);
 
   const handleLike = async () => {
-    await axios.put(`https://abmbackend11.onrender.com/api/users/like/${currentVideo._id}`);
-    dispatch(like(currentUser._id));
+    await axios.put(`https://abmbackend11.onrender.com/api/users/like/${currentVideo?._id}`);
+    dispatch(like(currentUser?._id));
   };
   const handleDislike = async () => {
     await axios.put(`https://abmbackend11.onrender.com/api/users/dislike/${currentVideo._id}`);
-    dispatch(dislike(currentUser._id));
+    dispatch(dislike(currentUser?._id));
   };
 
   // const handleSub = async () => {
@@ -183,8 +183,8 @@ const Video = () => {
 
   const handleSub = async() => {
     currentUser.subscribedUser.includes(channel._id)
-     ? await axios.put(`/users/unsub/${channel._id}`)
-      : await axios.put(`/users/sub/${channel._id}`);
+     ? await axios.put(`https://abmbackend11.onrender.com/api/users/unsub/${channel._id}`)
+      : await axios.put(`https://abmbackend11.onrender.com/api/users/sub/${channel._id}`);
       dispatch(subscription(channel._id));
   };
 
@@ -249,7 +249,7 @@ console.log(channel);
 
 
           <Subscribe onClick={handleSub}>
-          {currentUser.subscribedUsers?.includes(channel?._id)
+          {currentUser?.subscribedUsers?.includes(channel?._id)
             ? "SUBSCRIBED"
             : "SUBSCRIBE"}
         </Subscribe>
